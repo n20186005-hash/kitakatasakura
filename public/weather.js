@@ -270,7 +270,7 @@
 
   const renderError = () => {
     nowBox.innerHTML = `<p class="weather-loading">${I.t("wxError")}</p>`;
-    updatedBox.textContent = I.t("wxLoading") + "×";
+    updatedBox.textContent = I.t("wxUpdatedFail");
   };
 
   const apply = (data, pollen, cached) => {

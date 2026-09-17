@@ -6,8 +6,11 @@ const PAGE_CACHE = `kitakata-pages-${VERSION}`;
 const STATIC_ASSETS = [
   "./",
   "./index.html",
+  "./en/",
+  "./en/index.html",
   "./styles.css",
   "./script.js",
+  "./i18n.js",
   "./manifest.webmanifest",
   "./assets/sakura-mark.svg",
   "./assets/icons/icon-192.png",

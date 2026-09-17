@@ -54,6 +54,13 @@ npm run deploy
 - 同じ予測値から **「注意点（リスク）／服装の目安／遊び方のヒント／持っていくと便利なもの」** を自動生成します。条件を満たさない項目は表示されず、リスクがある時だけ上部に注意ブロックが出ます。しきい値は `weather.js` の `buildAdvice()` にまとめてあります。
 - 天気は予測値であり、警報・注意報は必ず気象庁の公式情報で確認してください。
 
+## 多言語（日本語 / English）
+
+- 日本語版 `public/index.html`（`<html lang="ja">`）と英語版 `public/en/index.html`（`<html lang="en">`）の 2 ページ構成です。`/en/` には `canonical` と `hreflang="en"` を設定し、ルートには `hreflang="ja"`・`x-default` を設定して相互リンクしています。
+- 両ページは **同じ `styles.css` / `script.js` / `weather.js` / `i18n.js`** を共有します。動的テキスト（メニュー・コース選択・シェア・天気アドバイス）は `public/i18n.js` の辞書から `document.documentElement.lang` に応じて切り替えます。
+- 英語版を編集する場合は、静的テキストは `public/en/index.html` を、動的テキストは `public/i18n.js` の `en:` ブロックを編集してください。日本語の表示は `ja:` ブロックのまま（現状と同じ文案）です。
+- 評価・口コミの扱いは両言語で同じ方針（ページ表示のみ・JSON-LD には含めない・出典併記）。英語版の FAQPage 構造化データも `public/en/index.html` 内にあり、`@id` は `https://kitakatasakura.com/en/#faq` です。
+
 ## PWA
 
 - `public/manifest.webmanifest`：アプリ名・アイコン（`public/assets/icons/`）・テーマカラーを定義
