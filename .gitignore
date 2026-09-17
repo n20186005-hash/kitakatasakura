@@ -1,12 +1,35 @@
+# 依存関係
 node_modules/
-dist/
-.env
-*.local
-.DS_Store
-*.log
-apps/web/src/routeTree.gen.ts
-releases/
+package-lock.json.bak
 
-
-.astro
+# Cloudflare Workers / Wrangler
 .wrangler/
+.mf/
+dist/
+worker/
+*.log
+npm-debug.log*
+
+# 環境変数・シークレット
+.env
+.env.*
+.dev.vars
+!.env.example
+
+# エディタ・OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 一時ファイル・生成物・キャッシュ
+.cache/
+.temp/
+tmp/
+*.tsbuildinfo
+*.local
+.astro
+releases/
+apps/web/src/routeTree.gen.ts

@@ -1,5 +1,13 @@
 document.documentElement.classList.add("js");
 
+if ("serviceWorker" in navigator && (window.location.protocol === "https:" || window.location.hostname === "localhost")) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch(() => undefined);
+  });
+}
+
+const I = window.I18N;
+
 const header = document.querySelector("[data-header]");
 const menuButton = document.querySelector("[data-menu-button]");
 const mobileMenu = document.querySelector("[data-mobile-menu]");
@@ -16,7 +24,7 @@ const closeMenu = () => {
   header?.classList.remove("menu-visible");
   document.body.classList.remove("menu-open");
   menuButton?.setAttribute("aria-expanded", "false");
-  menuButton?.setAttribute("aria-label", "メニューを開く");
+  menuButton?.setAttribute("aria-label", I.t("menuOpen"));
 };
 
 menuButton?.addEventListener("click", () => {
@@ -24,7 +32,7 @@ menuButton?.addEventListener("click", () => {
   header?.classList.toggle("menu-visible", open);
   document.body.classList.toggle("menu-open", open);
   menuButton.setAttribute("aria-expanded", String(open));
-  menuButton.setAttribute("aria-label", open ? "メニューを閉じる" : "メニューを開く");
+  menuButton.setAttribute("aria-label", open ? I.t("menuClose") : I.t("menuOpen"));
 });
 
 mobileMenu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
@@ -52,16 +60,16 @@ if ("IntersectionObserver" in window) {
 
 const plans = {
   short: {
-    label: "60分精華コース",
-    route: "喜多方駅 → 南側入口 → まちなか桜道 → SL広場 → 同じ道を戻る",
+    label: I.t("planShortLabel"),
+    route: I.t("planShortRoute"),
   },
   standard: {
-    label: "120分賞桜コース",
-    route: "南側入口 → SL広場 → 桜のトンネル → 北側の静かな区間 → 市街地へ戻る",
+    label: I.t("planStandardLabel"),
+    route: I.t("planStandardRoute"),
   },
   day: {
-    label: "喜多方一日コース",
-    route: "朝ラー → 日中線しだれ桜並木 → 昼食 → 蔵のまち歩き → 酒蔵・喫茶",
+    label: I.t("planDayLabel"),
+    route: I.t("planDayRoute"),
   },
 };
 
@@ -92,7 +100,7 @@ const setPlan = (name) => {
   const saved = localStorage.getItem("nitchu-saved-plan") === name;
   saveButton?.classList.toggle("saved", saved);
   const saveText = saveButton?.querySelector("span");
-  if (saveText) saveText.textContent = saved ? "保存済み" : "このコースを保存";
+  if (saveText) saveText.textContent = saved ? I.t("saveSaved") : I.t("savePrompt");
 };
 
 planButtons.forEach((button) => {
@@ -105,13 +113,13 @@ setPlan(savedPlan && plans[savedPlan] ? savedPlan : "standard");
 saveButton?.addEventListener("click", () => {
   localStorage.setItem("nitchu-saved-plan", selectedPlan);
   setPlan(selectedPlan);
-  showToast(`${plans[selectedPlan].label}をこの端末に保存しました`);
+  showToast(I.t("savedToast", [plans[selectedPlan].label]));
 });
 
 document.querySelector("[data-share]")?.addEventListener("click", async () => {
   const shareData = {
-    title: "日中線しだれ桜並木 旅人向けガイド",
-    text: "線路は消え、春だけの道が残った。喜多方の日中線しだれ桜並木を歩くためのガイドです。",
+    title: I.t("shareTitle"),
+    text: I.t("shareText"),
     url: window.location.href,
   };
 
@@ -121,8 +129,8 @@ document.querySelector("[data-share]")?.addEventListener("click", async () => {
       return;
     }
     await navigator.clipboard.writeText(window.location.href);
-    showToast("ページのアドレスをコピーしました");
+    showToast(I.t("copyToast"));
   } catch (error) {
-    if (error?.name !== "AbortError") showToast("共有できませんでした");
+    if (error?.name !== "AbortError") showToast(I.t("shareFail"));
   }
 });

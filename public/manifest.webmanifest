@@ -1,0 +1,42 @@
+{
+  "id": "https://kitakatasakura.com/",
+  "name": "日中線しだれ桜並木ガイド（喜多方市・福島県）",
+  "short_name": "日中線しだれ桜",
+  "description": "福島県喜多方市の日中線しだれ桜並木（Nicchusen Rows of Weeping Cherry Trees）を歩くための旅行ガイド。見頃、アクセス、駐車場、撮影スポットを案内します。",
+  "lang": "ja",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "any",
+  "background_color": "#f6f1e7",
+  "theme_color": "#242321",
+  "categories": ["travel", "lifestyle", "navigation"],
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/sakura-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
